@@ -15,6 +15,7 @@ var twenty_or_more_disposals = [
   {"Name":"Sam Walsh","Team":"Carlton","Matches Played":17,"Minimum Disposals":25.0},
   {"Name":"Caleb Serong","Team":"Fremantle","Matches Played":16,"Minimum Disposals":20.0},
 ];
+
 var table = new Tabulator("#twenty_or_more_disposals", {
   data:twenty_or_more_disposals,           //load row data from array
   layout:"fitColumns",      //fit columns to width of table
@@ -39,4 +40,14 @@ var table = new Tabulator("#twenty_or_more_disposals", {
     {column:"Minimum Disposals", dir:"desc"}, //sort by this first
     {column:"Matches Played", dir:"desc"}, //then sort by this second
   ]
+});
+table.extendModule("filter", "filters", {
+    "===":function(headerValue, rowValue, rowData, filterParams){
+        //headerValue - the value of the header filter element
+        //rowValue - the value of the column in this row
+        //rowData - the data for the row being filtered
+        //filterParams - params object passed to the headerFilterFuncParams property
+
+        return rowVal === headerValue ? true : false;
+    }
 });
